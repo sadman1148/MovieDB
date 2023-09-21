@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_item_movie"
+        android:title="@string/movies"
+        android:icon="@drawable/movie" />
+    <item
+        android:id="@+id/menu_item_shows"
+        android:title="@string/shows"
+        android:icon="@drawable/tv" />
+    <item
+        android:id="@+id/menu_item_graph"
+        android:title="@string/graph"
+        android:icon="@drawable/graph" />
+</menu>
