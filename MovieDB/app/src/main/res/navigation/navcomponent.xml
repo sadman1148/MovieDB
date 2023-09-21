@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_movie">
         <action
             android:id="@+id/action_movieFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            app:destination="@id/movieDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/showFragment"
@@ -20,12 +20,17 @@
         android:label="Trending Shows"
         tools:layout="@layout/fragment_show">
         <action
-            android:id="@+id/action_showFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            android:id="@+id/action_showFragment_to_showDetailFragment"
+            app:destination="@id/showDetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/detailFragment"
-        android:name="com.techetronventures.moviedb.ui.fragment.DetailFragment"
+        android:id="@+id/movieDetailFragment"
+        android:name="com.techetronventures.moviedb.ui.fragment.MovieDetailFragment"
         android:label="Details"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_movie_detail" />
+    <fragment
+        android:id="@+id/showDetailFragment"
+        android:name="com.techetronventures.moviedb.ui.fragment.ShowDetailFragment"
+        android:label="fragment_show_detail"
+        tools:layout="@layout/fragment_show_detail" />
 </navigation>

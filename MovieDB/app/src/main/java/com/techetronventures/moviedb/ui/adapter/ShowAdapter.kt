@@ -18,25 +18,25 @@ import com.bumptech.glide.request.RequestListener
 import com.google.gson.Gson
 import com.techetronventures.moviedb.R
 import com.techetronventures.moviedb.data.remote.api.APIUrl
-import com.techetronventures.moviedb.data.remote.model.Movie
+import com.techetronventures.moviedb.data.remote.model.Show
 import com.techetronventures.moviedb.databinding.RecyclerItemBinding
 
-class MovieAdapter(private val context: Context) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class ShowAdapter(private val context: Context) : RecyclerView.Adapter<ShowAdapter.ViewHolder>() {
 
-    private val movies = mutableListOf<Movie>()
+    private val shows = mutableListOf<Show>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addItems(movies: List<Movie>) {
-        this.movies.addAll(movies)
+    fun addItems(movies: List<Show>) {
+        this.shows.addAll(movies)
         notifyDataSetChanged()
     }
 
     inner class ViewHolder(private val binding: RecyclerItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: Movie) {
-            binding.name.text = movie.title
+        fun bind(show: Show) {
+            binding.name.text = show.name
             binding.loader.visibility = View.VISIBLE
             Glide.with(this.itemView)
-                .load(APIUrl.IMAGE_BASE_URL + movie.posterPath)
+                .load(APIUrl.IMAGE_BASE_URL + show.posterPath)
                 .listener(object : RequestListener<Drawable> {
                     override fun onResourceReady(
                         resource: Drawable,
@@ -70,14 +70,14 @@ class MovieAdapter(private val context: Context) : RecyclerView.Adapter<MovieAda
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MovieAdapter.ViewHolder, position: Int) {
-        holder.bind(movies[position])
+    override fun onBindViewHolder(holder: ShowAdapter.ViewHolder, position: Int) {
+        holder.bind(shows[position])
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("movie_data", Gson().toJson(movies[position]))
-            it.findNavController().navigate(R.id.action_movieFragment_to_detailFragment, bundle)
+            bundle.putString("show_data", Gson().toJson(shows[position]))
+            it.findNavController().navigate(R.id.action_showFragment_to_showDetailFragment, bundle)
         }
     }
 
-    override fun getItemCount() = movies.size
+    override fun getItemCount() = shows.size
 }

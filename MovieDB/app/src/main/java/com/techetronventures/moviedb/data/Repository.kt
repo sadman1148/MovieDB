@@ -2,7 +2,7 @@ package com.techetronventures.moviedb.data
 
 import com.techetronventures.moviedb.data.remote.api.APIService
 import com.techetronventures.moviedb.data.remote.model.BaseMovieResponse
-import com.techetronventures.moviedb.data.remote.model.BaseTvResponse
+import com.techetronventures.moviedb.data.remote.model.BaseShowResponse
 import com.techetronventures.moviedb.utils.State
 import kotlinx.coroutines.flow.flow
 import java.lang.Exception
@@ -20,7 +20,7 @@ class Repository @Inject constructor(private val apiService: APIService) {
         }
     }
 
-    fun getShowList(pageNumber: Int) = flow<State<BaseTvResponse>> {
+    fun getShowList(pageNumber: Int) = flow<State<BaseShowResponse>> {
         emit(State.Loading)
         try {
             val result = apiService.getShowList(pageNumber)

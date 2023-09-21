@@ -2,7 +2,7 @@ package com.techetronventures.moviedb.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class BaseTvResponse(
+data class BaseShowResponse(
     @SerializedName("page")
     val page: Int,
 

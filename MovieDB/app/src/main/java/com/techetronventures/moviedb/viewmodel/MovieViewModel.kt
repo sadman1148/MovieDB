@@ -19,6 +19,8 @@ class MovieViewModel @Inject constructor(private val repository: Repository) : V
     val movieListLiveData: LiveData<State<BaseMovieResponse>> get() = _movieListMutableLiveData
     private val _movieListMutableLiveData = MutableLiveData<State<BaseMovieResponse>>()
 
+    var totalPages = 0
+
     fun getMovieList(pageNumber: Int) {
         viewModelScope.launch {
             repository.getMovieList(pageNumber).onEach {

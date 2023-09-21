@@ -18,17 +18,17 @@ import com.google.gson.reflect.TypeToken
 import com.techetronventures.moviedb.R
 import com.techetronventures.moviedb.data.remote.api.APIUrl
 import com.techetronventures.moviedb.data.remote.model.Movie
-import com.techetronventures.moviedb.databinding.FragmentDetailBinding
+import com.techetronventures.moviedb.databinding.FragmentMovieDetailBinding
 import java.lang.reflect.Type
 
-class DetailFragment : Fragment() {
+class MovieDetailFragment : Fragment() {
 
-    private lateinit var binding: FragmentDetailBinding
+    private lateinit var binding: FragmentMovieDetailBinding
     private lateinit var movie: Movie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentDetailBinding.inflate(layoutInflater)
+        binding = FragmentMovieDetailBinding.inflate(layoutInflater)
         movie = getMovie()
         findNavController().graph.label = movie.title
     }
