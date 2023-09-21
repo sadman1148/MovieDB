@@ -3,4 +3,9 @@
     <string name="movies">Movies</string>
     <string name="shows">Shows</string>
     <string name="graph">Graph</string>
+    <string name="overview">Overview: %1$s</string>
+    <string name="released_on">Released on: %1$s</string>
+    <string name="popularity_score">Popularity score: %1$s</string>
+    <string name="votes">Votes: %1$s</string>
+    <string name="failed_to_banner_image">Failed to banner image</string>
 </resources>
