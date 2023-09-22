@@ -43,4 +43,8 @@ class Repository @Inject constructor(private val apiService: APIService, private
     suspend fun deleteById(movieId: Int) {
         movieDao.deleteById(movieId)
     }
+
+    suspend fun getFavoriteMovies(): List<Movie> {
+        return movieDao.getAllMovies()
+    }
 }

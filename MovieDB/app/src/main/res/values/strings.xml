@@ -13,5 +13,5 @@
     <string name="add_to_favorites">Add to favorites</string>
     <string name="watch_the_trailer">Watch the trailer</string>
     <string name="its_a_favorite">It\'s a favorite</string>
-    <string name="favorite_details">%1$s\n%2$s</string>
+    <string name="favorite_details">%1$s\n\n%2$s</string>
 </resources>

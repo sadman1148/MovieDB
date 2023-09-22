@@ -3,30 +3,29 @@ package com.techetronventures.moviedb.ui.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
-import com.google.gson.Gson
 import com.techetronventures.moviedb.R
 import com.techetronventures.moviedb.data.remote.api.APIUrl
 import com.techetronventures.moviedb.data.model.Movie
 import com.techetronventures.moviedb.databinding.FavoriteRecyclerBinding
+import com.techetronventures.moviedb.viewmodel.FavoriteViewModel
 
-class FavoriteAdapter(private val context: Context) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
+class FavoriteAdapter(private val context: Context, private val favoriteViewModel: FavoriteViewModel) : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
     private val movies = mutableListOf<Movie>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun addItems(movies: List<Movie>) {
+        this.movies.clear()
         this.movies.addAll(movies)
         notifyDataSetChanged()
     }
@@ -62,6 +61,9 @@ class FavoriteAdapter(private val context: Context) : RecyclerView.Adapter<Favor
                 })
                 .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .into(binding.favoriteImage)
+            binding.cross.setOnClickListener {
+                favoriteViewModel.deleteById(movie.id)
+            }
         }
     }
 
@@ -72,11 +74,7 @@ class FavoriteAdapter(private val context: Context) : RecyclerView.Adapter<Favor
 
     override fun onBindViewHolder(holder: FavoriteAdapter.ViewHolder, position: Int) {
         holder.bind(movies[position])
-        holder.itemView.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("movie_data", Gson().toJson(movies[position]))
-            it.findNavController().navigate(R.id.action_movieFragment_to_detailFragment, bundle)
-        }
     }
+
     override fun getItemCount() = movies.size
 }

@@ -11,7 +11,7 @@
         android:label="Trending Movies"
         tools:layout="@layout/fragment_movie">
         <action
-            android:id="@+id/action_movieFragment_to_detailFragment"
+            android:id="@+id/action_movieFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
     </fragment>
 
@@ -34,5 +34,10 @@
         android:id="@+id/showDetailFragment"
         android:name="com.techetronventures.moviedb.ui.fragment.ShowDetailFragment"
         tools:layout="@layout/fragment_show_detail" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.techetronventures.moviedb.ui.fragment.FavoriteFragment"
+        android:label="Favorites"
+        tools:layout="@layout/fragment_favorite" />
 
 </navigation>

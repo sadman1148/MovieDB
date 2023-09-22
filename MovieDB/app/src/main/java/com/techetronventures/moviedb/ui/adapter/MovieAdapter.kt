@@ -27,6 +27,7 @@ class MovieAdapter(private val context: Context) : RecyclerView.Adapter<MovieAda
 
     @SuppressLint("NotifyDataSetChanged")
     fun addItems(movies: List<Movie>) {
+        this.movies.clear()
         this.movies.addAll(movies)
         notifyDataSetChanged()
     }
@@ -75,7 +76,7 @@ class MovieAdapter(private val context: Context) : RecyclerView.Adapter<MovieAda
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("movie_data", Gson().toJson(movies[position]))
-            it.findNavController().navigate(R.id.action_movieFragment_to_detailFragment, bundle)
+            it.findNavController().navigate(R.id.action_movieFragment_to_movieDetailFragment, bundle)
         }
     }
 

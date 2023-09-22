@@ -100,6 +100,7 @@ class MovieDetailFragment : Fragment() {
             if (movieViewModel.isMovieInDatabase(movie.id)) {
                 setUiForSelectedFavorite()
             } else {
+                setUiForUnselectedFavorite()
                 binding.addToFavoriteCard.setOnClickListener {
                     viewLifecycleOwner.lifecycleScope.launch {
                         movieViewModel.addToFavorites(movie)
@@ -114,5 +115,14 @@ class MovieDetailFragment : Fragment() {
     private fun setUiForSelectedFavorite() {
         binding.addToFavoriteText.text = getString(R.string.its_a_favorite)
         binding.favoriteImage.setImageResource(R.drawable.favorite)
+    }
+
+    private fun setUiForUnselectedFavorite() {
+        binding.addToFavoriteText.text = getString(R.string.add_to_favorites)
+        binding.favoriteImage.setImageResource(R.drawable.favorite_red)
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 }

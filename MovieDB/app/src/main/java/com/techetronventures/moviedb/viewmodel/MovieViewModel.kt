@@ -38,8 +38,4 @@ class MovieViewModel @Inject constructor(private val repository: Repository) : V
         return repository.isMovieInDatabase(movieId)
     }
 
-    suspend fun deleteById(movieId: Int) {
-        repository.deleteById(movieId)
-    }
-
 }
