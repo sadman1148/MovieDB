@@ -24,10 +24,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.movieDetailFragment || destination.id == R.id.showDetailFragment) {
                 binding.bottomNavigationView.visibility = View.GONE
@@ -38,6 +40,7 @@ class MainActivity : AppCompatActivity() {
             }
             supportActionBar?.title = destination.label
         }
+
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_item_movie -> {

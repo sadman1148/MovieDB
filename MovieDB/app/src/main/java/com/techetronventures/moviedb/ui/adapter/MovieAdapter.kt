@@ -18,7 +18,7 @@ import com.bumptech.glide.request.RequestListener
 import com.google.gson.Gson
 import com.techetronventures.moviedb.R
 import com.techetronventures.moviedb.data.remote.api.APIUrl
-import com.techetronventures.moviedb.data.remote.model.Movie
+import com.techetronventures.moviedb.data.model.Movie
 import com.techetronventures.moviedb.databinding.RecyclerItemBinding
 
 class MovieAdapter(private val context: Context) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {

@@ -1,14 +1,13 @@
 package com.techetronventures.moviedb.ui.fragment
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -17,10 +16,11 @@ import com.bumptech.glide.request.RequestListener
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.techetronventures.moviedb.R
+import com.techetronventures.moviedb.data.model.Movie
 import com.techetronventures.moviedb.data.remote.api.APIUrl
-import com.techetronventures.moviedb.data.remote.model.Movie
 import com.techetronventures.moviedb.databinding.FragmentMovieDetailBinding
 import java.lang.reflect.Type
+
 
 class MovieDetailFragment : Fragment() {
 
@@ -68,6 +68,14 @@ class MovieDetailFragment : Fragment() {
             releaseDate.text = getString(R.string.released_on, movie.releaseDate)
             popularity.text = getString(R.string.popularity_score, movie.popularity.toString())
             votes.text = getString(R.string.votes, movie.voteCount.toString())
+            watchTrailerCard.setOnClickListener {
+                val intent = Intent(Intent.ACTION_SEARCH)
+                intent.setPackage("com.google.android.youtube")
+                intent.putExtra("query", "${movie.title} trailer")
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+            }
+
             return root
         }
     }

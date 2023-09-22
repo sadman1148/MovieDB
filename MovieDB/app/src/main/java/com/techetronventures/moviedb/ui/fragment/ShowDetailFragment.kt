@@ -17,7 +17,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.techetronventures.moviedb.R
 import com.techetronventures.moviedb.data.remote.api.APIUrl
-import com.techetronventures.moviedb.data.remote.model.Show
+import com.techetronventures.moviedb.data.model.Show
 import com.techetronventures.moviedb.databinding.FragmentShowDetailBinding
 import java.lang.reflect.Type
 
@@ -65,7 +65,7 @@ class ShowDetailFragment : Fragment() {
                 .into(backdrop)
             name.text = show.name
             overview.text = getString(R.string.overview, show.overview)
-            firstAirDate.text = getString(R.string.released_on, show.firstAirDate)
+            firstAirDate.text = getString(R.string.first_aired_on, show.firstAirDate, show.originCountry)
             popularity.text = getString(R.string.popularity_score, show.popularity.toString())
             votes.text = getString(R.string.votes, show.voteCount.toString())
             return root

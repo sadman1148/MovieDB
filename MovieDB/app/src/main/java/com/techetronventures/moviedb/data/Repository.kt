@@ -1,5 +1,6 @@
 package com.techetronventures.moviedb.data
 
+import com.techetronventures.moviedb.data.local.MovieDao
 import com.techetronventures.moviedb.data.remote.api.APIService
 import com.techetronventures.moviedb.data.remote.model.BaseMovieResponse
 import com.techetronventures.moviedb.data.remote.model.BaseShowResponse
@@ -8,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 import java.lang.Exception
 import javax.inject.Inject
 
-class Repository @Inject constructor(private val apiService: APIService) {
+class Repository @Inject constructor(private val apiService: APIService, private val movieDao: MovieDao) {
 
     fun getMovieList(pageNumber: Int) = flow<State<BaseMovieResponse>> {
         emit(State.Loading)

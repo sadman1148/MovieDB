@@ -1,25 +1,29 @@
-package com.techetronventures.moviedb.data.remote.model
+package com.techetronventures.moviedb.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-data class Movie(
+@Entity(tableName = "shows")
+data class Show(
     @SerializedName("adult")
     val adult: Boolean,
 
     @SerializedName("backdrop_path")
     val backdropPath: String,
 
+    @PrimaryKey
     @SerializedName("id")
     val id: Int,
 
-    @SerializedName("title")
-    val title: String,
+    @SerializedName("name")
+    val name: String,
 
     @SerializedName("original_language")
     val originalLanguage: String,
 
-    @SerializedName("original_title")
-    val originalTitle: String,
+    @SerializedName("original_name")
+    val originalName: String,
 
     @SerializedName("overview")
     val overview: String,
@@ -36,15 +40,15 @@ data class Movie(
     @SerializedName("popularity")
     val popularity: Float,
 
-    @SerializedName("release_date")
-    val releaseDate: String,
-
-    @SerializedName("video")
-    val video: Boolean,
+    @SerializedName("first_air_date")
+    val firstAirDate: String,
 
     @SerializedName("vote_average")
     val voteAverage: Float,
 
     @SerializedName("vote_count")
-    val voteCount: Int
+    val voteCount: Int,
+
+    @SerializedName("origin_country")
+    val originCountry: List<String>,
 )

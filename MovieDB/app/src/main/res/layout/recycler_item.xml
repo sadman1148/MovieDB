@@ -8,7 +8,7 @@
         android:id="@+id/materialCardView"
         android:layout_width="@dimen/dp_167"
         android:layout_height="@dimen/dp_250"
-        android:layout_margin="@dimen/dp_10"
+        android:layout_marginVertical="@dimen/dp_10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -32,7 +32,7 @@
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_20"
+        android:paddingHorizontal="@dimen/dp_10"
         android:gravity="center"
         android:paddingBottom="@dimen/dp_10"
         android:textSize="@dimen/sp_20"

@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/dp_5"
-                android:text="@string/released_on" />
+                android:text="@string/first_aired_on" />
 
             <TextView
                 android:id="@+id/popularity"

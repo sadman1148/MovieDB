@@ -1,6 +1,7 @@
 package com.techetronventures.moviedb.di
 
 import com.techetronventures.moviedb.data.Repository
+import com.techetronventures.moviedb.data.local.MovieDao
 import com.techetronventures.moviedb.data.remote.api.APIService
 import dagger.Module
 import dagger.Provides
@@ -14,7 +15,7 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideRepository(apiService: APIService): Repository {
-        return Repository(apiService)
+    fun provideRepository(apiService: APIService, movieDao: MovieDao): Repository {
+        return Repository(apiService, movieDao)
     }
 }
