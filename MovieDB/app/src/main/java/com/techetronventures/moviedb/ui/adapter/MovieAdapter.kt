@@ -27,7 +27,6 @@ class MovieAdapter(private val context: Context) : RecyclerView.Adapter<MovieAda
 
     @SuppressLint("NotifyDataSetChanged")
     fun addItems(movies: List<Movie>) {
-        this.movies.clear()
         this.movies.addAll(movies)
         notifyDataSetChanged()
     }
