@@ -13,7 +13,6 @@ import com.techetronventures.moviedb.R
 import com.techetronventures.moviedb.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 

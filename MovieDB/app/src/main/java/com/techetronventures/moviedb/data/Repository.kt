@@ -1,6 +1,7 @@
 package com.techetronventures.moviedb.data
 
 import com.techetronventures.moviedb.data.local.MovieDao
+import com.techetronventures.moviedb.data.model.Movie
 import com.techetronventures.moviedb.data.remote.api.APIService
 import com.techetronventures.moviedb.data.remote.model.BaseMovieResponse
 import com.techetronventures.moviedb.data.remote.model.BaseShowResponse
@@ -29,5 +30,17 @@ class Repository @Inject constructor(private val apiService: APIService, private
         } catch (exception: Exception) {
             emit(State.Error(exception))
         }
+    }
+
+    suspend fun addToFavorites(movie: Movie) {
+        movieDao.insert(movie)
+    }
+
+    suspend fun isMovieInDatabase(movieId: Int): Boolean {
+        return movieDao.isMovieInDatabase(movieId)
+    }
+
+    suspend fun deleteById(movieId: Int) {
+        movieDao.deleteById(movieId)
     }
 }

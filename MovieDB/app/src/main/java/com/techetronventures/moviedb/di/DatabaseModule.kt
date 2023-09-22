@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.techetronventures.moviedb.data.local.MovieDao
 import com.techetronventures.moviedb.data.local.MovieDatabase
 import com.techetronventures.moviedb.utils.Constants
+import com.techetronventures.moviedb.utils.Converters
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +22,7 @@ object DatabaseModule {
     fun provideRoom(@ApplicationContext context: Context): MovieDatabase {
         return Room.databaseBuilder(context, MovieDatabase::class.java, Constants.LOCAL_DB_NAME)
             .fallbackToDestructiveMigration()
+            .addTypeConverter(Converters())
             .build()
     }
 

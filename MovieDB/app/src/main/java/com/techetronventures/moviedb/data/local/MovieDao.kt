@@ -19,4 +19,10 @@ interface MovieDao {
 
     @Query("SELECT * FROM movies ORDER BY popularity DESC")
     suspend fun getMoviesSortedByPopularity(): List<Movie>
+
+    @Query("SELECT COUNT(*) FROM movies WHERE id = :movieId")
+    suspend fun isMovieInDatabase(movieId: Int): Boolean
+
+    @Query("DELETE FROM movies WHERE id = :movieId")
+    suspend fun deleteById(movieId: Int)
 }
