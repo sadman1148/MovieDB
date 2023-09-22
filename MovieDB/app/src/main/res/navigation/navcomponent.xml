@@ -14,6 +14,7 @@
             android:id="@+id/action_movieFragment_to_detailFragment"
             app:destination="@id/movieDetailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/showFragment"
         android:name="com.techetronventures.moviedb.ui.fragment.ShowFragment"
@@ -23,14 +24,15 @@
             android:id="@+id/action_showFragment_to_showDetailFragment"
             app:destination="@id/showDetailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="com.techetronventures.moviedb.ui.fragment.MovieDetailFragment"
-        android:label="Details"
         tools:layout="@layout/fragment_movie_detail" />
+
     <fragment
         android:id="@+id/showDetailFragment"
         android:name="com.techetronventures.moviedb.ui.fragment.ShowDetailFragment"
-        android:label="fragment_show_detail"
         tools:layout="@layout/fragment_show_detail" />
+
 </navigation>

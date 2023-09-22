@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -30,7 +31,6 @@ class MovieDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
         binding = FragmentMovieDetailBinding.inflate(layoutInflater)
         movie = getMovie()
-        findNavController().graph.label = movie.title
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
