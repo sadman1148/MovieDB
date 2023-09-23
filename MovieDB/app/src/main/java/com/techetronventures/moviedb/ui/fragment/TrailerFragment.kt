@@ -1,6 +1,7 @@
 package com.techetronventures.moviedb.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.techetronventures.moviedb.R
 import com.techetronventures.moviedb.databinding.FragmentTrailerBinding
+import com.techetronventures.moviedb.utils.Constants
 import com.techetronventures.moviedb.utils.State
 import com.techetronventures.moviedb.utils.Utility
 import com.techetronventures.moviedb.viewmodel.MovieViewModel
@@ -24,7 +26,7 @@ class TrailerFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentTrailerBinding.inflate(layoutInflater)
         binding.loader.visibility = View.VISIBLE
-        movieViewModel.getMovieTrailerYoutubeId((requireArguments().getInt("media_id")).toString())
+        movieViewModel.getMovieTrailerYoutubeId((requireArguments().getInt(Constants.KEY_MEDIA_ID)).toString())
         movieViewModel.movieDetailLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Loading -> {
@@ -36,6 +38,8 @@ class TrailerFragment : Fragment() {
                     binding.loader.visibility = View.GONE
                     if (it.data.results.isNotEmpty()) {
                         val trailerId = it.data.results[0].key
+                        Log.d("TrailerFragment", "Media ID: ${it.data.id}")
+                        Log.d("TrailerFragment", "Trailer ID: $trailerId")
                         val mediaPlayerHtml = "\n" +
                                 "<!DOCTYPE html>\n" +
                                 "<html>\n" +

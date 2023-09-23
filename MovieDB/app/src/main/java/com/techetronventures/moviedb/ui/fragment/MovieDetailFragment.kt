@@ -22,6 +22,7 @@ import com.techetronventures.moviedb.R
 import com.techetronventures.moviedb.data.model.Movie
 import com.techetronventures.moviedb.data.remote.api.APIUrl
 import com.techetronventures.moviedb.databinding.FragmentMovieDetailBinding
+import com.techetronventures.moviedb.utils.Constants
 import com.techetronventures.moviedb.viewmodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -77,7 +78,7 @@ class MovieDetailFragment : Fragment() {
             votes.text = getString(R.string.votes, movie.voteCount.toString())
             watchTrailerCard.setOnClickListener {
                 val bundle = Bundle()
-                bundle.putInt("media_id", movie.id)
+                bundle.putInt(Constants.KEY_MEDIA_ID, movie.id)
                 findNavController().navigate(
                     R.id.action_movieDetailFragment_to_trailerFragment,
                     bundle
@@ -94,7 +95,7 @@ class MovieDetailFragment : Fragment() {
 
     private fun getMovie(): Movie {
         val movie: Type = object : TypeToken<Movie>() {}.type
-        return Gson().fromJson(arguments?.getString("movie_data"), movie)
+        return Gson().fromJson(arguments?.getString(Constants.KEY_MOVIE_DATA), movie)
     }
 
     private fun handleFavorites() {

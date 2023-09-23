@@ -19,6 +19,7 @@ import com.techetronventures.moviedb.R
 import com.techetronventures.moviedb.data.remote.api.APIUrl
 import com.techetronventures.moviedb.data.model.Show
 import com.techetronventures.moviedb.databinding.FragmentShowDetailBinding
+import com.techetronventures.moviedb.utils.Constants
 import java.lang.reflect.Type
 
 class ShowDetailFragment : Fragment() {
@@ -68,20 +69,12 @@ class ShowDetailFragment : Fragment() {
             firstAirDate.text = getString(R.string.first_aired_on, show.firstAirDate, show.originCountry)
             popularity.text = getString(R.string.popularity_score, show.popularity.toString())
             votes.text = getString(R.string.votes, show.voteCount.toString())
-            watchTrailerCard.setOnClickListener {
-                val bundle = Bundle()
-                bundle.putInt("media_id", show.id)
-                findNavController().navigate(
-                    R.id.action_showDetailFragment_to_trailerFragment,
-                    bundle
-                )
-            }
             return root
         }
     }
 
     private fun getShow(): Show {
         val show: Type = object : TypeToken<Show>() {}.type
-        return Gson().fromJson(arguments?.getString("show_data"), show)
+        return Gson().fromJson(arguments?.getString(Constants.KEY_SHOW_DATA), show)
     }
 }

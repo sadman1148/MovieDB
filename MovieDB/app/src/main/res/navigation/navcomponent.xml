@@ -37,11 +37,7 @@
     <fragment
         android:id="@+id/showDetailFragment"
         android:name="com.techetronventures.moviedb.ui.fragment.ShowDetailFragment"
-        tools:layout="@layout/fragment_show_detail" >
-        <action
-            android:id="@+id/action_showDetailFragment_to_trailerFragment"
-            app:destination="@id/trailerFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_show_detail" />
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.techetronventures.moviedb.ui.fragment.FavoriteFragment"

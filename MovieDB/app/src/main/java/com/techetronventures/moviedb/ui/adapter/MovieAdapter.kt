@@ -20,6 +20,7 @@ import com.techetronventures.moviedb.R
 import com.techetronventures.moviedb.data.remote.api.APIUrl
 import com.techetronventures.moviedb.data.model.Movie
 import com.techetronventures.moviedb.databinding.RecyclerItemBinding
+import com.techetronventures.moviedb.utils.Constants
 
 class MovieAdapter(private val context: Context) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
@@ -74,7 +75,7 @@ class MovieAdapter(private val context: Context) : RecyclerView.Adapter<MovieAda
         holder.bind(movies[position])
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("movie_data", Gson().toJson(movies[position]))
+            bundle.putString(Constants.KEY_MOVIE_DATA, Gson().toJson(movies[position]))
             it.findNavController().navigate(R.id.action_movieFragment_to_movieDetailFragment, bundle)
         }
     }
