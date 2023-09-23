@@ -16,4 +16,7 @@ interface APIService {
 
     @GET("movie/{movie_id}/videos?api_key=${APIUrl.API_KEY}")
     suspend fun getMovieTrailerYoutubeId(@Path(value = "movie_id") movieId: String): MovieDetails
+
+    @GET(APIUrl.SEARCH_URL)
+    suspend fun getSearchResults(@Query("query") keywords: String): BaseMovieResponse
 }

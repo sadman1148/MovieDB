@@ -41,7 +41,7 @@
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.techetronventures.moviedb.ui.fragment.FavoriteFragment"
-        android:label="Favorites"
+        android:label="Favorite movies"
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/graphFragment"
@@ -51,5 +51,17 @@
         android:id="@+id/trailerFragment"
         android:name="com.techetronventures.moviedb.ui.fragment.TrailerFragment"
         tools:layout="@layout/fragment_trailer" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.techetronventures.moviedb.ui.fragment.SearchFragment"
+        android:label="Search movies"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_showDetailFragment"
+            app:destination="@id/showDetailFragment" />
+    </fragment>
 
 </navigation>

@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.movieDetailFragment
+                || destination.id == R.id.searchFragment
                 || destination.id == R.id.trailerFragment
                 || destination.id == R.id.showDetailFragment
                 || destination.id == R.id.favoriteFragment) {
@@ -76,12 +77,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         R.id.favorite -> {
-            navController.navigate(R.id.favoriteFragment)
+            if (navController.currentDestination?.id != R.id.favoriteFragment) {
+                navController.navigate(R.id.favoriteFragment)
+            }
             true
         }
 
         R.id.search -> {
-
+            if (navController.currentDestination?.id != R.id.searchFragment) {
+                navController.navigate(R.id.searchFragment)
+            }
             true
         }
 

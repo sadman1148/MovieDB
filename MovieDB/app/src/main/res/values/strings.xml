@@ -7,7 +7,7 @@
     <string name="released_on">Released on: %1$s</string>
     <string name="popularity_score">Popularity score: %1$s</string>
     <string name="votes">Votes: %1$s</string>
-    <string name="failed_to_banner_image">Failed to banner image</string>
+    <string name="failed_to_banner_image">Failed to load banner image</string>
     <string name="no_internet_connection">No Internet Connection</string>
     <string name="first_aired_on">First aired on: %1$s %2$s</string>
     <string name="add_to_favorites">Add to favorites</string>
@@ -16,4 +16,7 @@
     <string name="favorite_details">%1$s\n\n%2$s</string>
     <string name="next">NEXT</string>
     <string name="there_is_no_trailer_available_for_this">There is no trailer available for this…</string>
+    <string name="search">Search</string>
+    <string name="input_field_is_empty">Input field is empty</string>
+    <string name="we_couldnt_find_anything">We couldn\'t find anything</string>
 </resources>

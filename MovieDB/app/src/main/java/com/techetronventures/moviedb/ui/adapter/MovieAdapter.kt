@@ -57,7 +57,7 @@ class MovieAdapter(private val context: Context) : RecyclerView.Adapter<MovieAda
                         isFirstResource: Boolean
                     ): Boolean {
                         binding.loader.visibility = View.GONE
-                        Toast.makeText(context, R.string.no_internet_connection, Toast.LENGTH_SHORT).show()
+                        binding.deadlink.visibility = View.VISIBLE
                         return false
                     }
                 })

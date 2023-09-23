@@ -17,27 +17,28 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.google.gson.Gson
 import com.techetronventures.moviedb.R
+import com.techetronventures.moviedb.data.model.Movie
 import com.techetronventures.moviedb.data.remote.api.APIUrl
-import com.techetronventures.moviedb.data.model.Show
 import com.techetronventures.moviedb.databinding.RecyclerItemBinding
 import com.techetronventures.moviedb.utils.Constants
 
-class ShowAdapter(private val context: Context) : RecyclerView.Adapter<ShowAdapter.ViewHolder>() {
+class SearchAdapter(private val context: Context) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
-    private val shows = mutableListOf<Show>()
+    private val movies = mutableListOf<Movie>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addItems(movies: List<Show>) {
-        this.shows.addAll(movies)
+    fun addItems(movies: List<Movie>) {
+        this.movies.clear()
+        this.movies.addAll(movies)
         notifyDataSetChanged()
     }
 
     inner class ViewHolder(private val binding: RecyclerItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(show: Show) {
-            binding.name.text = show.name
+        fun bind(movie: Movie) {
+            binding.name.text = movie.title
             binding.loader.visibility = View.VISIBLE
             Glide.with(this.itemView)
-                .load(APIUrl.IMAGE_BASE_URL + show.posterPath)
+                .load(APIUrl.IMAGE_BASE_URL + movie.posterPath)
                 .listener(object : RequestListener<Drawable> {
                     override fun onResourceReady(
                         resource: Drawable,
@@ -71,14 +72,14 @@ class ShowAdapter(private val context: Context) : RecyclerView.Adapter<ShowAdapt
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ShowAdapter.ViewHolder, position: Int) {
-        holder.bind(shows[position])
+    override fun onBindViewHolder(holder: SearchAdapter.ViewHolder, position: Int) {
+        holder.bind(movies[position])
         holder.itemView.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString(Constants.KEY_SHOW_DATA, Gson().toJson(shows[position]))
-            it.findNavController().navigate(R.id.action_showFragment_to_showDetailFragment, bundle)
+            bundle.putString(Constants.KEY_MOVIE_DATA, Gson().toJson(movies[position]))
+            it.findNavController().navigate(R.id.action_searchFragment_to_movieDetailFragment, bundle)
         }
     }
 
-    override fun getItemCount() = shows.size
+    override fun getItemCount() = movies.size
 }

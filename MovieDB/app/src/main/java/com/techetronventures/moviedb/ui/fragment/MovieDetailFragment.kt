@@ -124,8 +124,4 @@ class MovieDetailFragment : Fragment() {
         binding.addToFavoriteText.text = getString(R.string.add_to_favorites)
         binding.favoriteImage.setImageResource(R.drawable.favorite_red)
     }
-
-    override fun onResume() {
-        super.onResume()
-    }
 }

@@ -42,6 +42,16 @@ class Repository @Inject constructor(private val apiService: APIService, private
         }
     }
 
+    fun getSearchResults(keywords: String) = flow {
+        emit(State.Loading)
+        try {
+            val result = apiService.getSearchResults(keywords)
+            emit(State.Success(result))
+        } catch (exception: Exception) {
+            emit(State.Error(exception))
+        }
+    }
+
     suspend fun addToFavorites(movie: Movie) {
         movieDao.insert(movie)
     }

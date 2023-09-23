@@ -6,4 +6,5 @@ object APIUrl {
     const val TRENDING_MOVIE = "trending/movie/day?api_key=${API_KEY}&language=en-US"
     const val TRENDING_SHOW = "trending/tv/day?api_key=${API_KEY}&language=en-US"
     const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original/"
+    const val SEARCH_URL = "search/movie?api_key=${API_KEY}"
 }

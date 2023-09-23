@@ -55,7 +55,7 @@ class FavoriteAdapter(private val context: Context, private val favoriteViewMode
                         isFirstResource: Boolean
                     ): Boolean {
                         binding.loader.visibility = View.GONE
-                        Toast.makeText(context, R.string.no_internet_connection, Toast.LENGTH_SHORT).show()
+                        binding.deadlink.visibility = View.VISIBLE
                         return false
                     }
                 })
