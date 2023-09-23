@@ -5,7 +5,6 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,34 +30,34 @@ class GraphFragment : Fragment() {
         stockDataList = readCSVFile()
     }
 
-    fun readCSVFile(): List<StockData> {
+    private fun readCSVFile(): List<StockData> {
 
         val stockDataList = mutableListOf<StockData>()
+        val dateFormat = SimpleDateFormat("yyyy-MM-d H:mm:ss",Locale.getDefault())
 
         try {
             // Open the CSV file
             val inputStream: InputStream = resources.openRawResource(R.raw.stock)
             val reader = BufferedReader(InputStreamReader(inputStream))
-            var line: String?
+            
+            // Skip the header row
+            reader.readLine()
+
+            var line: String? = reader.readLine()
 
             // Read and parse the CSV data
-            while (reader.readLine().also { line = it } != null) {
-                val tokens = line!!.split(",")
-                if (tokens.size == 6) {
-                    Log.d("SADMAN", "tokensize: ${tokens.size}")
-                    Log.d("SADMAN", "StockData: ${tokens[1]}, ${tokens[2]}, ${tokens[3]}, ${tokens[4]}, ${tokens[5]}, ${tokens[6]}")
-                    val timestamp =
-                        SimpleDateFormat("M/d/yyyy h:mm:ss a", Locale.getDefault()).parse(tokens[0])
-                    val open = tokens[1].toFloat()
-                    val high = tokens[2].toFloat()
-                    val low = tokens[3].toFloat()
-                    val close = tokens[4].toFloat()
-                    val volume = tokens[5].toFloat()
-
-                    val stockData = StockData(timestamp, open, high, low, close, volume)
-                    Log.d("SADMAN", "StockData: $timestamp, $open, $high, $low, $close, $volume")
-                    stockDataList.add(stockData)
+            while (line != null) {
+                val values = line.split(",")
+                if (values.size == 6) {
+                    val timestamp = dateFormat.parse(values[0].trim())
+                    val open = values[1].trim().toFloat()
+                    val high = values[2].trim().toFloat()
+                    val low = values[3].trim().toFloat()
+                    val close = values[4].trim().toFloat()
+                    val volume = values[5].trim().toFloat()
+                    stockDataList.add(StockData(timestamp!!, open, high, low, close, volume))
                 }
+                line = reader.readLine()
             }
             inputStream.close()
         } catch (e: Exception) {
@@ -69,7 +68,7 @@ class GraphFragment : Fragment() {
 
     inner class SpikeGraphView(context: Context) : View(context) {
 
-        private val margin = 50
+        private val margin = 100
         private val paddingTop = 100
         private val paddingBottom = 100
         private val paint = Paint()
@@ -82,15 +81,17 @@ class GraphFragment : Fragment() {
             val width = width.toFloat()
             val height = height.toFloat()
 
-            // Calculate the maximum and minimum values for scaling
+            // Calculating the maximum and minimum values for scaling
             val maxClose = stockDataList.map { it.close }.maxOrNull() ?: 0f
             val minClose = stockDataList.map { it.close }.minOrNull() ?: 0f
 
-            // Calculate scaling factors
-            val xScale = (width - 2 * margin) / stockDataList.size
+            // Calculating scaling factors
+            val minTimestamp = stockDataList.map { it.timestamp.time }.minOrNull() ?: 0L
+            val maxTimestamp = stockDataList.map { it.timestamp.time }.maxOrNull() ?: 0L
+            val xScale = (width - 2 * margin) / (maxTimestamp - minTimestamp)
             val yScale = (height - paddingTop - paddingBottom) / (maxClose - minClose)
 
-            paint.color = Color.BLACK
+            paint.color = Color.GRAY
             paint.strokeWidth = 2f
 
             // Draw the x-axis
@@ -99,13 +100,49 @@ class GraphFragment : Fragment() {
             // Draw the y-axis
             canvas.drawLine(margin.toFloat(), paddingTop.toFloat(), margin.toFloat(), height - paddingBottom, paint)
 
-            paint.color = Color.BLUE
+            // Label the X-axis as "timestamp"
+            paint.textSize = 30f // Adjust the text size as needed
+            canvas.drawText("Timestamp", width / 2, height - paddingBottom + 50, paint)
+
+            // Label the Y-axis as "close"
+            canvas.save()
+            canvas.rotate(-90f, (margin / 2).toFloat(), height / 2)
+            canvas.drawText("Close", (margin / 2).toFloat(), height / 2, paint)
+            canvas.restore()
+
+            paint.color = Color.YELLOW
             paint.strokeWidth = 4f
 
-            // Plot the spike graph
+            // Initialize variables for the starting point of the line
+            var startX: Float = 0f
+            var startY: Float = 0f
+
+            // Plotting the graph using "timestamp" and "close" values and connecting the points with lines
             for ((index, stockData) in stockDataList.withIndex()) {
-                val x = margin + index * xScale
+                val x = margin + (stockData.timestamp.time - minTimestamp) * xScale
                 val y = height - paddingBottom - (stockData.close - minClose) * yScale
+
+                if (index > 0) {
+                    // Drawing a line to connect the current and previous data points
+                    canvas.drawLine(startX, startY, x, y, paint)
+                }
+
+                // Set the current point as the starting point for the next line segment
+                startX = x
+                startY = y
+            }
+
+            paint.color = Color.RED
+            paint.strokeWidth = 4f
+
+            /**
+             * This bit only plots the points in the graph
+             */
+            for (stockData in stockDataList) {
+                val x = margin + (stockData.timestamp.time - minTimestamp) * xScale
+                val y = height - paddingBottom - (stockData.close - minClose) * yScale
+
+                // Draw a point at the data position
                 canvas.drawPoint(x, y, paint)
             }
         }

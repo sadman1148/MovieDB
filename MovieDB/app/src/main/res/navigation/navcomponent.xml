@@ -28,12 +28,20 @@
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="com.techetronventures.moviedb.ui.fragment.MovieDetailFragment"
-        tools:layout="@layout/fragment_movie_detail" />
+        tools:layout="@layout/fragment_movie_detail" >
+        <action
+            android:id="@+id/action_movieDetailFragment_to_trailerFragment"
+            app:destination="@id/trailerFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/showDetailFragment"
         android:name="com.techetronventures.moviedb.ui.fragment.ShowDetailFragment"
-        tools:layout="@layout/fragment_show_detail" />
+        tools:layout="@layout/fragment_show_detail" >
+        <action
+            android:id="@+id/action_showDetailFragment_to_trailerFragment"
+            app:destination="@id/trailerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.techetronventures.moviedb.ui.fragment.FavoriteFragment"
@@ -43,5 +51,9 @@
         android:id="@+id/graphFragment"
         android:name="com.techetronventures.moviedb.ui.fragment.GraphFragment"
         android:label="Graph" />
+    <fragment
+        android:id="@+id/trailerFragment"
+        android:name="com.techetronventures.moviedb.ui.fragment.TrailerFragment"
+        tools:layout="@layout/fragment_trailer" />
 
 </navigation>

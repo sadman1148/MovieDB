@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -75,11 +76,12 @@ class MovieDetailFragment : Fragment() {
             popularity.text = getString(R.string.popularity_score, movie.popularity.toString())
             votes.text = getString(R.string.votes, movie.voteCount.toString())
             watchTrailerCard.setOnClickListener {
-                val intent = Intent(Intent.ACTION_SEARCH)
-                intent.setPackage("com.google.android.youtube")
-                intent.putExtra("query", "${movie.title} trailer")
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
+                val bundle = Bundle()
+                bundle.putInt("media_id", movie.id)
+                findNavController().navigate(
+                    R.id.action_movieDetailFragment_to_trailerFragment,
+                    bundle
+                )
             }
             return root
         }

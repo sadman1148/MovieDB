@@ -68,6 +68,14 @@ class ShowDetailFragment : Fragment() {
             firstAirDate.text = getString(R.string.first_aired_on, show.firstAirDate, show.originCountry)
             popularity.text = getString(R.string.popularity_score, show.popularity.toString())
             votes.text = getString(R.string.votes, show.voteCount.toString())
+            watchTrailerCard.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putInt("media_id", show.id)
+                findNavController().navigate(
+                    R.id.action_showDetailFragment_to_trailerFragment,
+                    bundle
+                )
+            }
             return root
         }
     }
