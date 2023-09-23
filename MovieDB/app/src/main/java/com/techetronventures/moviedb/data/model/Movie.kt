@@ -10,7 +10,7 @@ data class Movie(
     val adult: Boolean,
 
     @SerializedName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String?,
 
     @PrimaryKey
     @SerializedName("id")
@@ -29,10 +29,10 @@ data class Movie(
     val overview: String,
 
     @SerializedName("poster_path")
-    val posterPath: String,
+    val posterPath: String?,
 
     @SerializedName("media_type")
-    val mediaType: String,
+    val mediaType: String?,
 
     @SerializedName("genre_ids")
     val genreIds: List<Int>,

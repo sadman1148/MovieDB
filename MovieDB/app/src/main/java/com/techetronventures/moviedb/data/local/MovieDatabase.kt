@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.techetronventures.moviedb.data.model.Movie
 import com.techetronventures.moviedb.utils.Converters
 
-@Database(entities = [Movie::class], version = 1)
+@Database(entities = [Movie::class], version = 4)
 @TypeConverters(Converters::class)
 abstract class MovieDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
