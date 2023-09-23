@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -51,6 +50,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.menu_item_shows -> {
                     navController.navigate(R.id.showFragment)
+                    true
+                }
+                R.id.menu_item_graph -> {
+                    navController.navigate(R.id.graphFragment)
                     true
                 }
                 else -> {

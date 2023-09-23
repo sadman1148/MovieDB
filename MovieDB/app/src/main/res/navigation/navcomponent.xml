@@ -39,5 +39,9 @@
         android:name="com.techetronventures.moviedb.ui.fragment.FavoriteFragment"
         android:label="Favorites"
         tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/graphFragment"
+        android:name="com.techetronventures.moviedb.ui.fragment.GraphFragment"
+        android:label="Graph" />
 
 </navigation>
