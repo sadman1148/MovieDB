@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.techetronventures.moviedb.data.Repository
 import com.techetronventures.moviedb.data.model.Movie
+import com.techetronventures.moviedb.data.model.MovieDetails
 import com.techetronventures.moviedb.data.remote.model.BaseMovieResponse
 import com.techetronventures.moviedb.utils.State
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,12 +21,23 @@ class MovieViewModel @Inject constructor(private val repository: Repository) : V
     val movieListLiveData: LiveData<State<BaseMovieResponse>> get() = _movieListMutableLiveData
     private val _movieListMutableLiveData = MutableLiveData<State<BaseMovieResponse>>()
 
+    val movieDetailLiveData: LiveData<State<MovieDetails>> get() = _movieDetailMutableLiveData
+    private val _movieDetailMutableLiveData = MutableLiveData<State<MovieDetails>>()
+
     var totalPages = 0
 
     fun getMovieList(pageNumber: Int) {
         viewModelScope.launch {
             repository.getMovieList(pageNumber).onEach {
                 _movieListMutableLiveData.value = it
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    fun getMovieTrailerYoutubeId(movieId: String) {
+        viewModelScope.launch {
+            repository.getMovieTrailerYoutubeId(movieId).onEach {
+                _movieDetailMutableLiveData.value = it
             }.launchIn(viewModelScope)
         }
     }

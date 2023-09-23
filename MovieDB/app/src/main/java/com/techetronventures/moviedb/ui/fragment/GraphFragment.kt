@@ -9,17 +9,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.techetronventures.moviedb.R
+import androidx.fragment.app.viewModels
 import com.techetronventures.moviedb.data.model.StockData
-import java.io.BufferedReader
-import java.io.InputStream
-import java.io.InputStreamReader
-import java.text.SimpleDateFormat
-import java.util.Locale
+import com.techetronventures.moviedb.viewmodel.GraphViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GraphFragment : Fragment() {
 
     private lateinit var stockDataList: List<StockData>
+    private val graphViewModel: GraphViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return SpikeGraphView(requireContext())
@@ -27,43 +26,7 @@ class GraphFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        stockDataList = readCSVFile()
-    }
-
-    private fun readCSVFile(): List<StockData> {
-
-        val stockDataList = mutableListOf<StockData>()
-        val dateFormat = SimpleDateFormat("yyyy-MM-d H:mm:ss",Locale.getDefault())
-
-        try {
-            // Open the CSV file
-            val inputStream: InputStream = resources.openRawResource(R.raw.stock)
-            val reader = BufferedReader(InputStreamReader(inputStream))
-            
-            // Skip the header row
-            reader.readLine()
-
-            var line: String? = reader.readLine()
-
-            // Read and parse the CSV data
-            while (line != null) {
-                val values = line.split(",")
-                if (values.size == 6) {
-                    val timestamp = dateFormat.parse(values[0].trim())
-                    val open = values[1].trim().toFloat()
-                    val high = values[2].trim().toFloat()
-                    val low = values[3].trim().toFloat()
-                    val close = values[4].trim().toFloat()
-                    val volume = values[5].trim().toFloat()
-                    stockDataList.add(StockData(timestamp!!, open, high, low, close, volume))
-                }
-                line = reader.readLine()
-            }
-            inputStream.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return stockDataList
+        stockDataList = graphViewModel.readCSVFile(requireContext())
     }
 
     inner class SpikeGraphView(context: Context) : View(context) {
@@ -102,7 +65,7 @@ class GraphFragment : Fragment() {
 
             // Label the X-axis as "timestamp"
             paint.textSize = 30f // Adjust the text size as needed
-            canvas.drawText("Timestamp", width / 2, height - paddingBottom + 50, paint)
+            canvas.drawText("Timestamp", (width / 2.3).toFloat(), height - paddingBottom + 50, paint)
 
             // Label the Y-axis as "close"
             canvas.save()

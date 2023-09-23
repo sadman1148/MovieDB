@@ -14,4 +14,6 @@
     <string name="watch_the_trailer">Watch the trailer</string>
     <string name="its_a_favorite">It\'s a favorite</string>
     <string name="favorite_details">%1$s\n\n%2$s</string>
+    <string name="next">NEXT</string>
+    <string name="there_is_no_trailer_available_for_this">There is no trailer available for this…</string>
 </resources>
