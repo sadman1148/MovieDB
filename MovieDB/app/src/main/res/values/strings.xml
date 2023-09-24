@@ -19,4 +19,5 @@
     <string name="search">Search</string>
     <string name="input_field_is_empty">Input field is empty</string>
     <string name="we_couldnt_find_anything">We couldn\'t find anything</string>
+    <string name="no_favorites_yet">You don\'t have any favorite movies</string>
 </resources>

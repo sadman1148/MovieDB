@@ -32,6 +32,11 @@ class FavoriteFragment : Fragment() {
         }.invokeOnCompletion {
             favoriteViewModel.favoriteMovieListLiveData.observe(viewLifecycleOwner) {
                 favoriteAdapter.addItems(it)
+                if (favoriteAdapter.itemCount == 0) {
+                    binding.noFavoriteLl.visibility = View.VISIBLE
+                } else {
+                    binding.noFavoriteLl.visibility = View.GONE
+                }
             }
         }
         return binding.root
