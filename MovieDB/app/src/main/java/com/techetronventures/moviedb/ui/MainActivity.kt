@@ -58,15 +58,24 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_item_movie -> {
-                    navController.navigate(R.id.movieFragment)
+                    if (navController.currentDestination?.id != R.id.movieFragment) {
+                        navController.popBackStack()
+                        navController.navigate(R.id.movieFragment)
+                    }
                     true
                 }
                 R.id.menu_item_shows -> {
-                    navController.navigate(R.id.showFragment)
+                    if (navController.currentDestination?.id != R.id.showFragment) {
+                        navController.popBackStack()
+                        navController.navigate(R.id.showFragment)
+                    }
                     true
                 }
                 R.id.menu_item_graph -> {
-                    navController.navigate(R.id.graphFragment)
+                    if (navController.currentDestination?.id != R.id.graphFragment) {
+                        navController.popBackStack()
+                        navController.navigate(R.id.graphFragment)
+                    }
                     true
                 }
                 else -> {
