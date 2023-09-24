@@ -3,7 +3,9 @@ package com.techetronventures.moviedb.ui.fragment
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.LinearGradient
 import android.graphics.Paint
+import android.graphics.Shader
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.techetronventures.moviedb.data.model.StockData
+import com.techetronventures.moviedb.ui.MainActivity
+import com.techetronventures.moviedb.utils.Constants
 import com.techetronventures.moviedb.viewmodel.GraphViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,6 +39,7 @@ class GraphFragment : Fragment() {
         private val paddingTop = 100
         private val paddingBottom = 100
         private val paint = Paint()
+        private val sharedPreferences = requireActivity().getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
 
         override fun onDraw(canvas: Canvas?) {
             super.onDraw(canvas)
@@ -54,7 +59,7 @@ class GraphFragment : Fragment() {
             val xScale = (width - 2 * margin) / (maxTimestamp - minTimestamp)
             val yScale = (height - paddingTop - paddingBottom) / (maxClose - minClose)
 
-            paint.color = Color.GRAY
+            paint.color = if (sharedPreferences.getBoolean(Constants.KEY_IS_DARK_THEME, false)) Color.WHITE else Color.BLACK
             paint.strokeWidth = 2f
 
             // Draw the x-axis
@@ -73,7 +78,17 @@ class GraphFragment : Fragment() {
             canvas.drawText("Close", (margin / 2).toFloat(), height / 2, paint)
             canvas.restore()
 
-            paint.color = Color.YELLOW
+            val shader = LinearGradient(
+                margin.toFloat(),
+                paddingTop.toFloat(),
+                margin.toFloat(),
+                height - paddingBottom,
+                Color.RED,
+                Color.YELLOW,
+                Shader.TileMode.CLAMP
+            )
+
+            paint.shader = shader
             paint.strokeWidth = 4f
 
             // Initialize variables for the starting point of the line
@@ -95,19 +110,20 @@ class GraphFragment : Fragment() {
                 startY = y
             }
 
-            paint.color = Color.RED
-            paint.strokeWidth = 4f
-
             /**
-             * This bit only plots the points in the graph
+             * This bit will plot the points in the graph too.
+             * But I am leaving it out to show a good gradient colored path
              */
-            for (stockData in stockDataList) {
-                val x = margin + (stockData.timestamp.time - minTimestamp) * xScale
-                val y = height - paddingBottom - (stockData.close - minClose) * yScale
-
-                // Draw a point at the data position
-                canvas.drawPoint(x, y, paint)
-            }
+//            paint.shader = null
+//            paint.color = if (sharedPreferences.getBoolean(Constants.KEY_IS_DARK_THEME, false)) Color.WHITE else Color.BLACK
+//            paint.strokeWidth = 4f
+//            for (stockData in stockDataList) {
+//                val x = margin + (stockData.timestamp.time - minTimestamp) * xScale
+//                val y = height - paddingBottom - (stockData.close - minClose) * yScale
+//
+//                // Draw a point at the data position
+//                canvas.drawPoint(x, y, paint)
+//            }
         }
     }
 }
