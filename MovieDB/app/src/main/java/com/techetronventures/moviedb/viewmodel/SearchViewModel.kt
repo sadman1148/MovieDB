@@ -23,10 +23,8 @@ class SearchViewModel @Inject constructor(private val repository: Repository) : 
     var totalPages = 0
 
     fun getSearchResults(keywords: String) {
-        viewModelScope.launch {
-            repository.getSearchResults(keywords).onEach {
-                _searchedMovieListMutableLiveData.value = it
-            }.launchIn(viewModelScope)
-        }
+        repository.getSearchResults(keywords).onEach {
+            _searchedMovieListMutableLiveData.value = it
+        }.launchIn(viewModelScope)
     }
 }

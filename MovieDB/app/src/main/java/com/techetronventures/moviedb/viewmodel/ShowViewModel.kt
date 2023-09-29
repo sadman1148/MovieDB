@@ -22,10 +22,8 @@ class ShowViewModel @Inject constructor(private val repository: Repository) : Vi
     var totalPages = 0
 
     fun getShowList(pageNumber: Int) {
-        viewModelScope.launch {
-            repository.getShowList(pageNumber).onEach {
-                _showListMutableLiveData.value = it
-            }.launchIn(viewModelScope)
-        }
+        repository.getShowList(pageNumber).onEach {
+            _showListMutableLiveData.value = it
+        }.launchIn(viewModelScope)
     }
 }

@@ -27,19 +27,15 @@ class MovieViewModel @Inject constructor(private val repository: Repository) : V
     var totalPages = 0
 
     fun getMovieList(pageNumber: Int) {
-        viewModelScope.launch {
-            repository.getMovieList(pageNumber).onEach {
-                _movieListMutableLiveData.value = it
-            }.launchIn(viewModelScope)
-        }
+        repository.getMovieList(pageNumber).onEach {
+            _movieListMutableLiveData.value = it
+        }.launchIn(viewModelScope)
     }
 
     fun getMovieTrailerYoutubeId(movieId: String) {
-        viewModelScope.launch {
-            repository.getMovieTrailerYoutubeId(movieId).onEach {
-                _movieDetailMutableLiveData.value = it
-            }.launchIn(viewModelScope)
-        }
+        repository.getMovieTrailerYoutubeId(movieId).onEach {
+            _movieDetailMutableLiveData.value = it
+        }.launchIn(viewModelScope)
     }
 
     suspend fun addToFavorites(movie: Movie) {
